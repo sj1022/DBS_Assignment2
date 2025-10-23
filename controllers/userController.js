@@ -8,9 +8,9 @@ const getUsersPage = async (req, res, next) => {
             TODO: 검색어에 맞춰 유저 목록을 출력하는 페이지를 렌더링하는 코드를 작성하세요.
         */
         let sql = 
-            `SELECT user_id, role, birth_year, overdue_cnt 
+            `SELECT User.user_id, role, birth_year, overdue_cnt 
             FROM User
-            LEFT JOIN Blacklist b ON (b.user_id = User.user_id AND b.due_date > CURDATE()`;
+            LEFT JOIN Blacklist b ON (b.user_id = User.user_id AND b.end_date > CURDATE())`;
         let params = [];
 
         const columns = ['user_id', 'role', 'birth_year', 'overdue_cnt']; //보안을 위해 searchBy 제한
@@ -39,8 +39,6 @@ const getUsersPage = async (req, res, next) => {
         } else {
             sql += ' ORDER BY user_id'
         }
-        console.log('SQL:', sql);
-        console.log('Params:', params);
 
         const [users] = await db.query(sql, params);
 

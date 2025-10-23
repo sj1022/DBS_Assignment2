@@ -13,7 +13,7 @@ const getCategoriesPage = async (req, res, next) => {
             GROUP BY c.category_id, c.category_name
             ORDER BY c.category_name
             `;
-        const [categories] = await db.query(query);
+        const [categories] = await db.query(sql);
         res.render('pages/categories', {
             title: 'Category Management',
             categories: categories // 카테고리 리스트가 전달되어야 합니다.
@@ -25,7 +25,7 @@ const getCategoriesPage = async (req, res, next) => {
 
 const postDeleteCategory = async (req, res, next) => {
     const categoryId = Number(req.params.id);
-    const connection = await db.getConnection();
+    const connection = await db.pool.getConnection();
     try {
         await connection.beginTransaction();        
         /*

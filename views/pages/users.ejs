@@ -31,7 +31,7 @@
                             <th>Role</th>
                             <th>Birth Year</th>
                             <th>Overdue Count</th>
-                            <th>Blacklist Status</th>
+                            <th>Blacklist</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,7 +42,7 @@
                                 <td><%= user.birth_year %></td>
                                 <td><%= user.overdue_cnt %></td>
                                 <td>
-                                    <% user.blacklist_id ? 'Yes' : 'No'
+                                    <%= user.blacklist_id ? 'Yes' : 'No'%>
                                 </td>
                             </tr>
                         <% }); %>
