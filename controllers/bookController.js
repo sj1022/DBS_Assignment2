@@ -185,7 +185,7 @@ const postDeleteBookInstance = async (req, res, next) => {
             동일한 책을 모두 제거하면 해당 책에 대한 정보도 지워지도록 구현해주세요.
         */
         const [bookinstance] = await connection.query(
-            'SELECT booktype_id FROM Book WHERE book_id = ?', [bookInstanceId]
+            'SELECT booktype_id, status FROM Book WHERE book_id = ?', [bookInstanceId]
         );
 
         if (bookinstance.length === 0) {
@@ -194,6 +194,15 @@ const postDeleteBookInstance = async (req, res, next) => {
         }
 
         const booktypeId = bookinstance[0].booktype_id;
+        const bookStatus = bookinstance[0].status;
+
+        //대출 중인 책은 삭제 불가  
+        if (bookStatus === 'borrowed') {
+            const err = new Error('Cannot delete a borrowed book. Please return it first.');
+            err.status = 400;
+            throw err;
+        }
+
         await connection.query(
             'DELETE FROM Book WHERE book_id = ?', [bookInstanceId]
         );
