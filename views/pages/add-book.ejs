@@ -63,6 +63,13 @@
                     addChoices: true,
                 });
             }
+            //카테고리는 필수 입력
+            document.querySelector('form').addEventListener('submit', (e) => {
+                if (categoriesElement.selectedOptions.length === 0) {
+                    e.preventDefault();
+                    alert('Please enter an categories.');
+                }
+            });
         });
     </script>
 </body>

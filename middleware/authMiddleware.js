@@ -1,5 +1,5 @@
 const isAuthenticated = (req, res, next) => {
-    if (req.session.userId) {
+    if (req.session.user_id) {
         next();
     } else {
         res.redirect('/login');
@@ -7,7 +7,7 @@ const isAuthenticated = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-    if (req.session.userId && req.session.role === 'admin') {
+    if (req.session.user_id && req.session.role === 'admin') {
         next();
     } else {
         const err = new Error('Access Denied: Admins only.');

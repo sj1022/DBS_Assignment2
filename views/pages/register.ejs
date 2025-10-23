@@ -14,12 +14,23 @@
                 <h2 class="mb-3"><%= title %></h2>
                 <form action="/register" method="POST">
                     <div class="form-group">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" id="username" name="username" class="form-control" required>
+                        <label for="user_id" class="form-label">User ID</label>
+                        <input type="text" id="user_id" name="user_id" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birth_year" class="form-label">Birth year</label>
+                        <select id="birth_year" name="birth_year" class="form-control" required>
+                            <option value="">select your birth year</option>
+                            <%                
+                                const currentYear = new Date().getFullYear();                 
+                                for (let year=currentYear; year>= 1930; year--) { %> 
+                                <option value="<%= year %>"><%= year %></option>
+                            <% } %>
+                        </select>
                     </div>
                     <div class="d-flex flex-row gap-2">
                         <div class="form-group">

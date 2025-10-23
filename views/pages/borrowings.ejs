@@ -43,6 +43,59 @@
                     </tbody>
                 </table>
             </div>
+            <div class="card mb-3">
+                <h2 class="mb-3"> Monthly Borrowing Data (Last 12 Months)</h2>
+                <% if (data.monthly.length> 0) { %>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Borrow counts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% data.monthly.forEach(data=> { %>
+                                <tr>
+                                    <td>
+                                        <%= data.month %>
+                                    </td>
+                                    <td>
+                                        <%= data.cnt %>
+                                    </td>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                    <% } else { %>
+                        <p>There's no borrowing data for last 12 Months.</p>
+                        <% } %>
+            </div>
+            <div class="card mb-3">
+                <h2 class="mb-3">Most Borrowed Categories</h2>
+                <% if (data.categories.length> 0) { %>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Borrow Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% data.categories.forEach((data)=> { %>
+                                <tr>                                   
+                                    <td>
+                                        <%= data.category_name %>
+                                    </td>
+                                    <td>
+                                        <%= data.cnt %>
+                                    </td>                                  
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                    <% } else { %>
+                        <p>There's no borrowing data.</p>
+                        <% } %>
+            </div>
         </main>
     </div>
 </body>

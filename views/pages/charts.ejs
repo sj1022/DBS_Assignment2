@@ -10,6 +10,36 @@
     <div class="container">
         <%- include('../components/header') %>
         <main>
+            <% if (ageGroupBooks) { %>
+                <div class="card mb-3">
+                    <h2 class="mb-3"> Popular Books for your <%= ageGroupBooks.ageGroup %> (Last 3 Months)</h2>
+                    <% if (ageGroupBooks.books.length> 0) { %>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Categories</th>
+                                    <th>Borrow Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% ageGroupBooks.books.forEach(book=> { %>
+                                    <tr>
+                                        <td><%= book.title %></td>
+                                        <td><%= book.author %></td>
+                                        <td><%= book.categories %></td>
+                                        <td><%= book.borrow_count %></td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                        <% } else { %>
+                            <p>There's no borrowing data for your age group.</p>
+                            <% } %>
+                </div>
+            <% } %>
+
             <div class="card mb-3">
                 <h2 class="mb-3">Overall Popular Books (Last 3 Months)</h2>
                 <table class="table table-striped">

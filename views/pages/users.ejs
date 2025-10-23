@@ -15,8 +15,10 @@
                 <div class="mb-3">
                     <form action="/users" method="GET" class="d-flex gap-2">
                         <select name="searchBy" class="form-select">
-                            <option value="username" <%= typeof searchBy !== 'undefined' && searchBy === 'username' ? 'selected' : '' %>>Username</option>
+                            <option value="user_id" <%= typeof searchBy !== 'undefined' && searchBy === 'user_id' ? 'selected' : '' %>>User ID</option>
                             <option value="role" <%= typeof searchBy !== 'undefined' && searchBy === 'role' ? 'selected' : '' %>>Role</option>
+                            <option value="birth_year" <%=typeof searchBy !=='undefined' && searchBy==='birth_year' ? 'selected' : '' %>>Birth Year</option>
+                            <option value="overdue_cnt" <%=typeof searchBy !=='undefined' && searchBy==='overdue_cnt' ? 'selected' : '' %>>Overdue Count</option>
                         </select>
                         <input type="text" name="query" placeholder="Search..." value="<%= typeof query !== 'undefined' ? query : '' %>" class="form-control">
                         <button type="submit" class="btn btn-primary">Search</button>
@@ -25,17 +27,23 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Username</th>
+                            <th>User ID</th>
                             <th>Role</th>
+                            <th>Birth Year</th>
+                            <th>Overdue Count</th>
+                            <th>Blacklist Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% users.forEach(user => { %>
                             <tr>
-                                <td><%= user.id %></td>
-                                <td><%= user.username %></td>
+                                <td><%= user.user_id %></td>
                                 <td><%= user.role %></td>
+                                <td><%= user.birth_year %></td>
+                                <td><%= user.overdue_cnt %></td>
+                                <td>
+                                    <% user.blacklist_id ? 'Yes' : 'No'
+                                </td>
                             </tr>
                         <% }); %>
                     </tbody>
