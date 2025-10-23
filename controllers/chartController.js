@@ -106,6 +106,8 @@ const getChartsPage = async (req, res, next) => {
         });
 
     } catch (err) {
+        console.error("---!!! CHART CONTROLLER ERROR !!!---");
+        console.error(err);
         next(err);
     }
 };
