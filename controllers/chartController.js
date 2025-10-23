@@ -36,9 +36,9 @@ const getChartsPage = async (req, res, next) => {
         if (selectedCategoryId) {
             const [categoryBooks] = await db.query(`
                 SELECT 
-                bt.title as title, bt.author as author,
-                GROUP_CONCAT(DISTINCT c.category_name ORDER BY c.category_name SEPARATOR ', ') as categories,
-                COUNT(DISTINCT l.loan_id) as borrow_count
+                    bt.title as title, bt.author as author,
+                    GROUP_CONCAT(DISTINCT c.category_name ORDER BY c.category_name SEPARATOR ', ') as categories,
+                    COUNT(DISTINCT l.loan_id) as borrow_count
                 FROM Loan l
                 JOIN Book b ON l.book_id = b.book_id
                 JOIN Booktype bt ON b.booktype_id = bt.booktype_id
